@@ -12,11 +12,11 @@ const home_index = (req, res) => {
 // login page
 const login_index = (req, res) => {
     res.render('login.ejs')
+
 };
 const loginpost_index = (req, res) => {
     const loginDetails = req.body;
     myModel.login(loginDetails, function(data) {
-        console.log(data);
         if (data.length > 0) {
             req.session.user = req.body.email;
             res.redirect('/');

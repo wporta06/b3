@@ -1,6 +1,47 @@
-<h1>hoolaa</h1>
-<h3>
-    <%= user %>
+<!DOCTYPE html>
 
-</h3>
-<a href="/logout">LOGOUT</a>
+<html lang="en">
+
+<%- include("./partials/head")  %>
+
+    <body>
+        <!-- nav -->
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <%- include("./partials/nav")  %>
+                    <!-- right content -->
+                    <div class="col py-3">
+
+                        <div class="content ">
+                            <form>
+                                <H3>Add Question</H3>
+                                <div class="d-flex justify-content-center">
+
+                                    <div class="input-group">
+                                        <div class="">
+                                            <span class="input-group-text" id="inputGroup-sizing-default">Question</span>
+                                        </div>
+                                        <input type="text" name="question" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="anwserinput">
+                                    <button type="button" value="0" class="btn btn-outline-primary addanwserbtn">ADD Anwser</button>
+                                    <!-- from js -->
+                                </div>
+
+                                <button type="submit" class="btn btn-outline-primary createbtn">Create</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- end of right content -->
+            </div>
+        </div>
+    </body>
+
+    <!-- footer here -->
+    <%- include("./partials/footer")  %>
+
+</html>
+<script src="js/questions.js"></script>
