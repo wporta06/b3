@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-const bodyparser = require('body-parser');
+// const bodyparser = require('body-parser');
 const session = require('express-session');
+//for css
+app.use(express.static('public'));
 
 // const bcrypt = require('bcrypt');
 
@@ -28,6 +30,25 @@ app.use('/logout', Routers);
 app.use('/register', Routers);
 
 app.listen(3000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

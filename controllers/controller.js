@@ -2,6 +2,7 @@ var myModel = require('../model/mymodel');
 
 // home page after login
 const home_index = (req, res) => {
+    console.log(req.session);
     if (req.session.user) {
         res.render('index.ejs', { user: req.session.user })
     } else {
@@ -17,9 +18,12 @@ const login_index = (req, res) => {
 const loginpost_index = (req, res) => {
     const loginDetails = req.body;
     myModel.login(loginDetails, function(data) {
-        if (data.length > 0) {
+        if (data.length > 0 && data[0].role == "admin") {
             req.session.user = req.body.email;
             res.redirect('/');
+            console.log("admin loged successfully");
+        } else if (data.length > 0 && data[0].role == "user") {
+            res.redirect('/test');
             console.log("user loged successfully");
         } else {
             res.redirect('/login');

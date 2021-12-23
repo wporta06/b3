@@ -3,7 +3,7 @@ const con = require('../db/dbcnx');
 module.exports = {
 
     register: function(registerDetails, callback) {
-        var sql = `INSERT INTO auth (name, email, password) VALUES ('${registerDetails.name}', '${registerDetails.email}', '${registerDetails.password}')`;
+        var sql = `INSERT INTO auth (name, email, password, role) VALUES ('${registerDetails.name}', '${registerDetails.email}', '${registerDetails.password}', '${registerDetails.role}')`;
         con.query(sql, function(err, data) {
             if (err) throw err;
             return callback(data);
