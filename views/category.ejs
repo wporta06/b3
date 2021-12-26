@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<%- include("./partials/head")  %>
+
+    <body>
+        <!-- nav -->
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <%- include("./partials/nav")  %>
+                    <!-- right content -->
+                    <div class="col py-3">
+                        <H3>Add Category</H3>
+
+                        <div class="content ">
+                            <div class="d-flex justify-content-center">
+                                <select class="form-select category_type" aria-label="Default select example">
+                                        <option selected>Select Type</option>
+                                        <option value="parent" >Parent</option>
+                                        <option value="child">Child</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="input-group ">
+                                    <form action="/category" method="POST">
+                                        <div class="childselected" style="display: none;">
+                                            <input type="text" id="parentname" name="parentname" class="form-control" placeholder="Parent Name">
+                                        </div>
+                                        <div class="parentselected" style="display: none;">
+
+                                            <select class="form-select" name="parentt" aria-label="Default select example">
+                                                <option selected>Select Parent Name</option>
+                                                <!-- show all parent_category -->
+                                                <% categoryData.forEach(function(data){ %>
+                                                <option value="<%=data.id %>"><%=data.parent_category%></option>
+                                                <% }) %>
+                                            </select>
+                                            <div class="childname" style="display: none;">
+                                                <input type="text" id="childname" name="childname" class="form-control" placeholder="Child Name">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-outline-primary addbtn">ADD</button>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <div class="datatable ">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Category Name</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <!-- from index.js -->
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- end of right content -->
+            </div>
+
+        </div>
+
+    </body>
+
+    <!-- footer here -->
+
+
+
+</html>
+<script src="/scripts/category.js"></script>

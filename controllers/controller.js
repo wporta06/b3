@@ -2,18 +2,50 @@ var myModel = require('../model/mymodel');
 
 // home page after login
 const home_index = (req, res) => {
-    console.log(req.session);
+    // console.log(req.session);
     if (req.session.user) {
         res.render('index.ejs', { user: req.session.user })
     } else {
         res.redirect('/login')
     }
 };
+// add parent and child category
+const homepost_index = (req, res) => {
+    const questionDetails = req.body;
+    myModel.addquestion(questionDetails, function(data) {
+        console.log("question inserted successfully");
+        // res.redirect('/');
+        // header["lo"]
+        // console.log(data);
+    });
+
+    res.redirect("/")
+};
+
+// category page 
+const category_index = (req, res) => {
+    if (req.session.user) {
+        myModel.getallparentscategory(function(data) {
+            res.render('category.ejs', { user: req.session.user, categoryData: data });
+        });
+    } else {
+        res.redirect('/login')
+    }
+};
+// add parent and child category
+const categorypost_index = (req, res) => {
+    const categoryDetails = req.body;
+    myModel.addparentcategory(categoryDetails, function(data) {
+        res.redirect('/category');
+        console.log("parent category inserted successfully");
+        console.log(data);
+    });
+
+};
 
 // login page
 const login_index = (req, res) => {
     res.render('login.ejs')
-
 };
 const loginpost_index = (req, res) => {
     const loginDetails = req.body;
@@ -58,6 +90,9 @@ const registerpost_index = (req, res) => {
 
 module.exports = {
     home_index,
+    homepost_index,
+    category_index,
+    categorypost_index,
     login_index,
     logout_index,
     loginpost_index,

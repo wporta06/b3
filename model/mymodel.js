@@ -2,6 +2,59 @@ const con = require('../db/dbcnx');
 
 module.exports = {
 
+    // add question
+    addquestion: function(questionDetails, callback) {
+
+        var sql = `INSERT INTO questions (question,correct_answer) VALUES ('fffwff','3')`;
+
+        con.query(sql, function(err, data) {
+            // console.log(data);
+            if (err) throw err;
+            return callback(data);
+        });
+
+        var sql2 = `INSERT INTO anwsers (anwser,question_id,correct_answer) VALUES ('ddwds','1','2')`;
+
+        con.query(sql2, function(err, data) {
+            // console.log(data);
+            if (err) throw err;
+            return callback(data);
+        });
+    },
+
+    // add parent category
+    addparentcategory: function(categoryDetails, callback) {
+        if (categoryDetails.parentname !== "") {
+            var sql = `INSERT INTO parentscategory (parent_category) VALUES ('${categoryDetails.parentname}')`;
+        } else {
+            // if (categoryDetails.childname !== "") {
+            var sql = `INSERT INTO childscategory (child_category,parent_category_id) VALUES ('${categoryDetails.childname}','${categoryDetails.parentt}')`;
+        }
+
+
+        con.query(sql, function(err, data) {
+            if (err) throw err;
+            return callback(data);
+        });
+    },
+    addchildcategory: function(categoryDetails, callback) {
+        var sql = `INSERT INTO childscategory (child_category) VALUES ('${categoryDetails.childname}')`;
+        con.query(sql, function(err, data) {
+            if (err) throw err;
+            return callback(data);
+        });
+    },
+
+    // get all parent categorys
+    getallparentscategory: function(callback) {
+        var sql = 'SELECT * FROM parentscategory';
+        con.query(sql, function(err, data, fields) {
+            if (err) throw err;
+            return callback(data);
+        });
+    },
+
+
     register: function(registerDetails, callback) {
         var sql = `INSERT INTO auth (name, email, password, role) VALUES ('${registerDetails.name}', '${registerDetails.email}', '${registerDetails.password}', '${registerDetails.role}')`;
         con.query(sql, function(err, data) {
@@ -32,6 +85,8 @@ module.exports = {
             }
         });
     },
+
+
 
 
 

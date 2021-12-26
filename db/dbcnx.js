@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 
+// creatpoot is beter than createConnection (close cnx avry time)
 var cnx = mysql.createConnection({
     host: "localhost",
     user: "root",

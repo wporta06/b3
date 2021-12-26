@@ -14,8 +14,8 @@ const Routers = require('./routes/allRoutes');
 
 app.use(session({
     secret: 'secret',
-    resave: false,
-    saveUninitialized: true
+    resave: true,
+    // saveUninitialized: false
 }))
 
 app.set('view-engine', 'ejs');
@@ -24,8 +24,10 @@ app.set('view-engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/', Routers);
+// app.post('/', Routers);
+app.use('/category', Routers);
 app.use('/login', Routers);
-app.post('/login', Routers);
+// app.post('/login', Routers);
 app.use('/logout', Routers);
 app.use('/register', Routers);
 
