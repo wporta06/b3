@@ -32,12 +32,14 @@
                                     <!-- anwser one -->
                                     <div class="anwsers input-group m-4">
                                         <div>
-                                            <span class="input-group-text" id="inputGroup-sizing-default">Anwser </span>
+                                            <span class="input-group-text" id="inputGroup-sizing-default">Anwser 1</span>
                                         </div>
                                         <div class="cccc">
-                                            <input type="text" name="anwser" class="form-control addinput" style="width:27em">
+                                            <input type="text" name="answer" class="form-control addinput" style="width:27em">
                                         </div class="form-check">
-                                        <input class="form-check-input" onclick="" type="checkbox" value="">
+
+                                        <input hidden class="form-check-input" name="corectanswer" value="false">
+                                        <input class="form-check-input" onclick="clicked(this)" value="0" type="checkbox">
                                     </div>
                                     <!-- others from js -->
                                 </div>

@@ -2,10 +2,10 @@ const con = require('../db/dbcnx');
 
 module.exports = {
 
-    // add question
+    // add question and answer
     addquestion: function(questionDetails, callback) {
-
-        var sql = `INSERT INTO questions (question,correct_answer) VALUES ('fffwff','3')`;
+        // add question
+        var sql = `INSERT INTO questions (question,correct_answer) VALUES ('${questionDetails.question}','${questionDetails.correctanwser}')`;
 
         con.query(sql, function(err, data) {
             // console.log(data);
@@ -13,7 +13,7 @@ module.exports = {
             return callback(data);
         });
 
-        var sql2 = `INSERT INTO anwsers (anwser,question_id,correct_answer) VALUES ('ddwds','1','2')`;
+        var sql2 = `INSERT INTO answers (anwser,correct_answer) VALUES ('${questionDetails.anwser}','${questionDetails.correctanwser}')`;
 
         con.query(sql2, function(err, data) {
             // console.log(data);

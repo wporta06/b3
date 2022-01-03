@@ -1,18 +1,36 @@
 const addanwserbtn = document.querySelector(".addanwserbtn");
 const anwserinput = document.querySelector(".anwserinput");
-addanwserbtn.addEventListener("click", (eo) => {
-    // console.log(item);
-    // if (eo.value == 0) {
 
+
+let anwserindex = 1;
+let correctindexvalue;
+
+addanwserbtn.addEventListener("click", (eo) => {
     console.log("dsdsfsfsf");
-    // }
-    anwserinput.insertAdjacentHTML('beforeend', ` <div class="anwsers input-group">
-     <div>
-    <span class="input-group-text" id="inputGroup-sizing-default">Anwser </span>
+
+    anwserinput.insertAdjacentHTML('beforeend', `<div class="anwsers input-group m-4">
+    <div>
+        <span class="input-group-text" id="inputGroup-sizing-default">Anwser ${anwserindex + 1} </span>
     </div>
     <div class="cccc">
-    <input type="text" class="form-control addinput" style="width:27em">
-    </div class="form-check" style="margin-left:1em;margin-top: 0em;">
-    <input class="form-check-input" onclick="" type="checkbox" value="">
-    </div>`)
+        <input type="text" name="answer" class="form-control addinput" style="width:27em">
+    </div class="form-check">
+
+    <input hidden class="form-check-input" name="corectanswer" value="false">
+    <input class="form-check-input" onclick="clicked(this)" value="${anwserindex}" type="checkbox">
+</div>`)
+    anwserindex++
 })
+
+function clicked(obj) {
+    if (obj.checked = true) {
+        console.log("yess");
+        // console.log(obj.value);
+        // console.log(obj.previousElementSibling.value);
+        obj.previousElementSibling.value = obj.value;
+        // obj.value = 1;
+    } else {
+        console.log("noo");
+    }
+    // console.log(obj.value);
+}

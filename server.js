@@ -1,14 +1,30 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+
+
+// mongo db cnx
+const dbURI = "mongodb+srv://walid:test1234@cluster0.rdrot.mongodb.net/quizdb?retryWrites=true&w=majority";
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then((result) => app.listen(3000))
+    .then(console.log("connected to mongoo"))
+    .catch((err) => console.log(err))
+
+
 // const bodyparser = require('body-parser');
 const session = require('express-session');
-//for css
+
+//for css & midleware
 app.use(express.static('public'));
+
+// for POST req, { extended: true } just an option. it take data coming from url and put it in object
+app.use(express.urlencoded({ extended: true }));
 
 // const bcrypt = require('bcrypt');
 
 // app.use(bodyparser.json());
 // app.use(bodyparser.urlencoded({ extended: true }));
+
 
 const Routers = require('./routes/allRoutes');
 
@@ -31,7 +47,7 @@ app.use('/login', Routers);
 app.use('/logout', Routers);
 app.use('/register', Routers);
 
-app.listen(3000)
+
 
 
 

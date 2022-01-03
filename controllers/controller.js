@@ -1,4 +1,5 @@
 var myModel = require('../model/mymodel');
+const Quiz = require('../model/quiz');
 
 // home page after login
 const home_index = (req, res) => {
@@ -9,17 +10,23 @@ const home_index = (req, res) => {
         res.redirect('/login')
     }
 };
-// add parent and child category
+// add quoition and anwser category
 const homepost_index = (req, res) => {
-    const questionDetails = req.body;
-    myModel.addquestion(questionDetails, function(data) {
-        console.log("question inserted successfully");
-        // res.redirect('/');
-        // header["lo"]
-        // console.log(data);
-    });
 
-    res.redirect("/")
+    // filter the correct answers
+    req.body.corectanswer = req.body.corectanswer.filter(rmfalse => rmfalse != "false");
+
+    const quiz = new Quiz(req.body);
+    console.log(quiz);
+
+    quiz.save()
+        .then((result) => {
+            res.redirect('/');
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 };
 
 // category page 
