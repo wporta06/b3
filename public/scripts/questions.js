@@ -4,7 +4,6 @@ const anwserinput = document.querySelector(".anwserinput");
 
 let anwserindex = 1;
 let correctindexvalue;
-
 addanwserbtn.addEventListener("click", (eo) => {
     console.log("dsdsfsfsf");
 
@@ -22,6 +21,8 @@ addanwserbtn.addEventListener("click", (eo) => {
     anwserindex++
 })
 
+const hii = document.querySelector(".hii");
+
 function clicked(obj) {
     if (obj.checked = true) {
         console.log("yess");
@@ -34,3 +35,18 @@ function clicked(obj) {
     }
     // console.log(obj.value);
 }
+
+
+function clickedd(obj) {
+
+    console.log("jjj");
+    console.log(obj.value);
+
+    hii.value = obj.value
+
+
+
+}
+// const ddd = document.querySelector('.ddd')
+
+// ddd.addEventListener('click', (e) => {

@@ -52,6 +52,17 @@ module.exports = {
             if (err) throw err;
             return callback(data);
         });
+
+
+
+    },
+    // get all child categorys
+    getchildcategory: function(callback) {
+        var sql = 'SELECT * FROM childscategory';
+        con.query(sql, function(err, data, fields) {
+            if (err) throw err;
+            return callback(data);
+        });
     },
 
 

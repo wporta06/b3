@@ -5,7 +5,16 @@ const Quiz = require('../model/quiz');
 const home_index = (req, res) => {
     // console.log(req.session);
     if (req.session.user) {
-        res.render('index.ejs', { user: req.session.user })
+        let data1
+        let data2
+        myModel.getallparentscategory(function(data) {
+            data1 = data;
+            // res.render('index.ejs', { user: req.session.user, parentcategoryData: data });
+        });
+        myModel.getchildcategory(function(data) {
+            data2 = data
+            res.render('index.ejs', { user: req.session.user, parentcategoryData: data1, getchildcategory: data2 });
+        });
     } else {
         res.redirect('/login')
     }

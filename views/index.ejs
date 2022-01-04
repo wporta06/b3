@@ -2,6 +2,9 @@
 
 <html lang="en">
 <%- include("./partials/head")  %>
+    <script>
+        var test = 14
+    </script>
 
     <body>
         <!-- nav -->
@@ -16,6 +19,28 @@
                                 <H3>Add Question</H3>
                                 <div class="m-4">
                                     <!-- category hereee from txt file -->
+                                    <!-- parent category -->
+                                    <select class="form-select" name="parentt" onclick="clickedd(this)" aria-label="Default select example">
+                                        <option selected>Select Parent category</option>
+                                        
+                                        <% parentcategoryData.forEach(function(data1){ %>
+                                        <option class="dropdownid" value="<%=data1.id %>"><%=data1.parent_category%></option>
+                                       
+                                        <% }) %>
+                                    </select>
+
+                                    <!-- childe category -->
+
+                                    <select class="form-select" name="parentt" aria-label="Default select example">
+                                        <option class="hii" selected>Select child category</option>
+                                        
+                                        <% getchildcategory.forEach(function(data){ %>
+                                            <% if(1 == data.parent_category_id){ %>
+                                            <option value="<%=data.id %>"><%=data.child_category%></option>
+                                            <%  } %>
+                                            <% }) %>
+                                        
+                                    </select>
                                 </div>
                                 <div class="d-flex justify-content-center m-4">
 
