@@ -1,29 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const quizSchema = new Schema({
-        question: {
+const authSchema = new Schema({
+        name: {
             type: 'string',
             required: true
         },
-        answer: [],
-        corectanswer: [],
-        parent_category: {
-            type: 'string'
+        email: {
+            type: 'string',
+            required: true
         },
-        child_category: {
-            type: 'string'
+        password: {
+            type: 'string',
+            required: true
         },
+        role: {
+            type: 'string',
+            default: "user"
+        },
+
     }, { timestamps: true }) //{ timestamps: true } for add time
 
-const Quiz = mongoose.model('Quiz', quizSchema);
-module.exports = Quiz;
-
-
-
-
-
-
+const Auth = mongoose.model('Auth', authSchema);
+module.exports = Auth;
 
 
 

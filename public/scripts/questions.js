@@ -41,8 +41,10 @@ function clickedd(obj) {
 
     console.log("jjj");
     console.log(obj.value);
-
+    // console.log(test);
+    test = obj.value
     hii.value = obj.value
+
 
 
 

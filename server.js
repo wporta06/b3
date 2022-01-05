@@ -36,8 +36,8 @@ app.use(session({
 
 app.set('view-engine', 'ejs');
 
-// allow us to access the form data from req in POST  
-app.use(express.urlencoded({ extended: false }));
+
+// app.use(express.urlencoded({ extended: false }));
 
 app.use('/', Routers);
 // app.post('/', Routers);

@@ -1,5 +1,6 @@
 var myModel = require('../model/mymodel');
 const Quiz = require('../model/quiz');
+const Auth = require('../model/auth');
 
 // home page after login
 const home_index = (req, res) => {
@@ -12,14 +13,19 @@ const home_index = (req, res) => {
             // res.render('index.ejs', { user: req.session.user, parentcategoryData: data });
         });
         myModel.getchildcategory(function(data) {
-            data2 = data
-            res.render('index.ejs', { user: req.session.user, parentcategoryData: data1, getchildcategory: data2 });
+            data2 = data;
+            // res.render('index.ejs', { user: req.session.user, parentcategoryData: data1, getchildcategory: data2 });
         });
+        Quiz.find().sort({ createdAt: -1 })
+            .then((result) => {
+                res.render('index.ejs', { user: req.session.user, parentcategoryData: data1, getchildcategory: data2, allquestions: result });
+            });
+
     } else {
         res.redirect('/login')
     }
 };
-// add quoition and anwser category
+// add question and anwser category
 const homepost_index = (req, res) => {
 
     // filter the correct answers
@@ -36,6 +42,19 @@ const homepost_index = (req, res) => {
         .catch((err) => {
             console.log(err);
         })
+};
+
+const delete_index = (req, res) => {
+    // to access the id in URL, must add :id
+    const id = req.params.id;
+    // we delete but must send json back, cause we use script  ruring in browser
+    Quiz.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirection: '/' });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
 // category page 
@@ -63,21 +82,24 @@ const categorypost_index = (req, res) => {
 const login_index = (req, res) => {
     res.render('login.ejs')
 };
+
 const loginpost_index = (req, res) => {
-    const loginDetails = req.body;
-    myModel.login(loginDetails, function(data) {
-        if (data.length > 0 && data[0].role == "admin") {
-            req.session.user = req.body.email;
-            res.redirect('/');
-            console.log("admin loged successfully");
-        } else if (data.length > 0 && data[0].role == "user") {
-            res.redirect('/test');
-            console.log("user loged successfully");
-        } else {
-            res.redirect('/login');
-            console.log("wrong email or password");
-        }
-    });
+    var query = { email: req.body.email, password: req.body.password };
+    Auth.find(query)
+        .then((result) => {
+            // console.log(result[0].role)
+            if (result.length > 0 && result[0].role == "admin") {
+                req.session.user = req.body.email;
+                res.redirect('/');
+                console.log("admin loged successfully");
+            } else {
+                res.redirect('/login');
+                console.log("wrong email or password");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 };
 const logout_index = (req, res) => {
     req.session.destroy(function(err) {
@@ -94,19 +116,28 @@ const logout_index = (req, res) => {
 const register_index = (req, res) => {
     res.render('register.ejs')
 };
+
 const registerpost_index = (req, res) => {
-    const registerDetails = req.body;
-    myModel.register(registerDetails, function(data) {
-        res.redirect('/login');
-        console.log("user inserted successfully");
-        // console.log(data);
-    });
+    // filter the correct answers
+
+    const auth = new Auth(req.body);
+    // console.log(auth);
+
+    auth.save()
+        .then((result) => {
+            res.redirect('/');
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 };
 
 
 module.exports = {
     home_index,
     homepost_index,
+    delete_index,
     category_index,
     categorypost_index,
     login_index,
@@ -119,6 +150,64 @@ module.exports = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================================
+// myModel.login(loginDetails, function(data) {
+//     if (data.length > 0 && data[0].role == "admin") {
+//         req.session.user = req.body.email;
+//         res.redirect('/');
+//         console.log("admin loged successfully");
+//     } else if (data.length > 0 && data[0].role == "user") {
+//         res.redirect('/test');
+//         console.log("user loged successfully");
+//     } else {
+//         res.redirect('/login');
+//         console.log("wrong email or password");
+//     }
+// });
+
+// const registerpost_index = (req, res) => {
+//     const registerDetails = req.body;
+//     myModel.register(registerDetails, function(data) {
+//         res.redirect('/login');
+//         console.log("user inserted successfully");
+//         // console.log(data);
+//     });
+// };
+
+
+// const loginpost_index = (req, res) => {
+//     const loginDetails = req.body;
+//     myModel.login(loginDetails, function(data) {
+//         if (data.length > 0 && data[0].role == "admin") {
+//             req.session.user = req.body.email;
+//             res.redirect('/');
+//             console.log("admin loged successfully");
+//         } else if (data.length > 0 && data[0].role == "user") {
+//             res.redirect('/test');
+//             console.log("user loged successfully");
+//         } else {
+//             res.redirect('/login');
+//             console.log("wrong email or password");
+//         }
+//     });
+// };
+// ================================
 // ================================
 
 // const loginpost_index = (req, res) => {

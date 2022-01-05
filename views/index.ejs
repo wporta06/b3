@@ -2,9 +2,7 @@
 
 <html lang="en">
 <%- include("./partials/head")  %>
-    <script>
-        var test = 14
-    </script>
+
 
     <body>
         <!-- nav -->
@@ -25,8 +23,8 @@
                                         
                                         <% parentcategoryData.forEach(function(data1){ %>
                                         <option class="dropdownid" value="<%=data1.id %>"><%=data1.parent_category%></option>
-                                       
                                         <% }) %>
+                                     
                                     </select>
 
                                     <!-- childe category -->
@@ -34,8 +32,11 @@
                                     <select class="form-select" name="parentt" aria-label="Default select example">
                                         <option class="hii" selected>Select child category</option>
                                         
+                                        <div class="sq">
+                                            <% let dd=14 %>
+                                        </div>
                                         <% getchildcategory.forEach(function(data){ %>
-                                            <% if(1 == data.parent_category_id){ %>
+                                            <% if(dd == data.parent_category_id){ %>
                                             <option value="<%=data.id %>"><%=data.child_category%></option>
                                             <%  } %>
                                             <% }) %>
@@ -75,39 +76,46 @@
 
                             <hr>
                             <hr>
+                            <form action="/" method="DELETE">
+                                <div class="datatable">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Questions</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Anwsers</th>
+                                                <th scope="col">َAction</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                            <% allquestions.forEach(function(data){ %>
+                                                <td value="<%=data.id%>" name="id" scope="col">#</td>
+                                                <td scope="col">
+                                                    <%=data.question %>
+                                                </td>
+                                                <td scope="col">---</td>
+                                                <td scope="col">
+                                                    <select class="form-select">
+                                                        <% data.answer.forEach(function(data){ %>
+                                                        <!-- <option selected disabled>All Anwsers</option> -->
+                                                        <option class=""><%=data%><option>
+                                                        <% }) %>
+                                                        </select>
+                                                </td>
+                                                <td>
+                                                    <!-- <button type="submit" class="detbtn btn btn-danger">DELETE</button> -->
+                                                    <a class="delete" data-doc="<%=data.id%>">delete</a>
+                                                    <!-- <button value="" class="detbtn btn btn-warning">EDIT</button> -->
+                                                </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
 
-                            <div class="datatable">
-                                <table class="table">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Questions</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Anwsers</th>
-                                            <th scope="col">َAction</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tbody">
-                                        <!-- from index.js -->
-                                        <td scope="col">#</td>
-                                        <td scope="col">Questions 1</td>
-                                        <td scope="col">math</td>
-                                        <td scope="col"><select class="form-select">
-                                            <!-- from teacher.js -->
-                                            <option selected disabled>All Anwsers</option>
-                                            <option >Anwsers 1</option>
-                                            <option class="bg-success">Anwsers 2</option>
-                                            <option > Anwsers 3</option>
-                                          </select></td>
-                                        <td><button value="" class="detbtn btn btn-danger">DELETE</button>
-                                            <button value="" class="detbtn btn btn-warning">EDIT</button>
-                                        </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
 
-
-                            </div>
+                                </div>
+                            </form>
                         </div>
 
                     </div>
@@ -125,3 +133,26 @@
 
 </html>
 <script src="/scripts/questions.js"></script>
+
+
+
+<script>
+    // for delete
+    const trashcan = document.querySelector('a.delete');
+
+    trashcan.addEventListener('click', (e) => {
+        const endpoint = `/${trashcan.dataset.doc}`;
+
+        fetch(endpoint, {
+                method: 'DELETE',
+            }) //response from app.js
+            .then(response => response.json())
+            .then(data => window.location.href = data.redirection)
+            .catch(err => console.log(err));
+    });
+
+    // const dd = document.querySelector('dropdownid');
+    // dd.addEventListener("click", (eo) => {
+    //     console.log('dddl');
+    // })
+</script>

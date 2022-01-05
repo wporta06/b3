@@ -52,9 +52,6 @@ module.exports = {
             if (err) throw err;
             return callback(data);
         });
-
-
-
     },
     // get all child categorys
     getchildcategory: function(callback) {

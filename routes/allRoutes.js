@@ -8,6 +8,7 @@ const router = express.Router();
 // show all blogs
 router.get('/', Controller.home_index);
 router.post('/', Controller.homepost_index);
+router.delete('/:id', Controller.delete_index);
 router.get('/category', Controller.category_index);
 router.post('/category', Controller.categorypost_index);
 router.get('/login', Controller.login_index);
