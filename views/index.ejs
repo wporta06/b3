@@ -76,46 +76,44 @@
 
                             <hr>
                             <hr>
-                            <form action="/" method="DELETE">
-                                <div class="datatable">
-                                    <table class="table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Questions</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Anwsers</th>
-                                                <th scope="col">َAction</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <% allquestions.forEach(function(data){ %>
-                                                <td value="<%=data.id%>" name="id" scope="col">#</td>
-                                                <td scope="col">
-                                                    <%=data.question %>
-                                                </td>
-                                                <td scope="col">---</td>
-                                                <td scope="col">
-                                                    <select class="form-select">
+
+                            <div class="datatable">
+                                <table class="table">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Questions</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Anwsers</th>
+                                            <th scope="col">َAction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <% allquestions.forEach(function(data){ %>
+                                            <td value="<%=data.id%>" name="id" scope="col">#</td>
+                                            <td scope="col">
+                                                <%=data.question %>
+                                            </td>
+                                            <td scope="col">---</td>
+                                            <td scope="col">
+                                                <select class="form-select">
                                                         <% data.answer.forEach(function(data){ %>
                                                         <!-- <option selected disabled>All Anwsers</option> -->
                                                         <option class=""><%=data%><option>
                                                         <% }) %>
                                                         </select>
-                                                </td>
-                                                <td>
-                                                    <!-- <button type="submit" class="detbtn btn btn-danger">DELETE</button> -->
-                                                    <a class="delete" data-doc="<%=data.id%>">delete</a>
-                                                    <!-- <button value="" class="detbtn btn btn-warning">EDIT</button> -->
-                                                </td>
-                                                </tr>
-                                                <% }) %>
-                                        </tbody>
-                                    </table>
+                                            </td>
+                                            <td>
+                                                <!-- <button type="submit" class="detbtn btn btn-danger">DELETE</button> -->
+                                                <a class="delete detbtn btn btn-danger" data-doc="<%=data.id%>">delete</a>
+                                            </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
 
 
-                                </div>
-                            </form>
+                            </div>
                         </div>
 
                     </div>
@@ -145,7 +143,7 @@
 
         fetch(endpoint, {
                 method: 'DELETE',
-            }) //response from app.js
+            }) //response from server.js
             .then(response => response.json())
             .then(data => window.location.href = data.redirection)
             .catch(err => console.log(err));

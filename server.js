@@ -17,14 +17,8 @@ const session = require('express-session');
 //for css & midleware
 app.use(express.static('public'));
 
-// for POST req, { extended: true } just an option. it take data coming from url and put it in object
+// for POST req, { extended: true } just an option. it takes data coming from url and put it in object
 app.use(express.urlencoded({ extended: true }));
-
-// const bcrypt = require('bcrypt');
-
-// app.use(bodyparser.json());
-// app.use(bodyparser.urlencoded({ extended: true }));
-
 
 const Routers = require('./routes/allRoutes');
 
@@ -40,10 +34,8 @@ app.set('view-engine', 'ejs');
 // app.use(express.urlencoded({ extended: false }));
 
 app.use('/', Routers);
-// app.post('/', Routers);
 app.use('/category', Routers);
 app.use('/login', Routers);
-// app.post('/login', Routers);
 app.use('/logout', Routers);
 app.use('/register', Routers);
 

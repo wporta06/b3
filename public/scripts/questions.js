@@ -26,14 +26,10 @@ const hii = document.querySelector(".hii");
 function clicked(obj) {
     if (obj.checked = true) {
         console.log("yess");
-        // console.log(obj.value);
-        // console.log(obj.previousElementSibling.value);
         obj.previousElementSibling.value = obj.value;
-        // obj.value = 1;
     } else {
         console.log("noo");
     }
-    // console.log(obj.value);
 }
 
 
@@ -44,9 +40,6 @@ function clickedd(obj) {
     // console.log(test);
     test = obj.value
     hii.value = obj.value
-
-
-
 
 }
 // const ddd = document.querySelector('.ddd')
